@@ -1,5 +1,7 @@
 # 📸 Instagram Post Generator
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/HarnasDGE/Instagram-Post-Generator)
+
 Nowoczesna aplikacja do generowania postów na Instagram z wykorzystaniem AI, zbudowana w Astro + React.
 
 ## ✨ Funkcje
@@ -195,12 +197,22 @@ Aplikacja jest statyczna i może być wdrożona na:
 - GitHub Pages
 - Dowolny hosting statyczny
 
-#### Deploy na Vercel
+#### Deploy na Vercel (ZALECANE)
 
-```bash
-npm install -g vercel
-vercel
-```
+**Najprostsza metoda - przez Dashboard:**
+
+1. Push kod na GitHub
+2. Przejdź do [vercel.com](https://vercel.com)
+3. Kliknij **"Add New"** → **"Project"**
+4. Import repozytorium **"Instagram-Post-Generator"**
+5. Dodaj Environment Variables (opcjonalnie):
+   ```
+   PUBLIC_ENABLE_TURNSTILE=false
+   PUBLIC_USE_MOCK=true
+   ```
+6. Kliknij **"Deploy"**
+
+**Szczegółowa instrukcja:** Zobacz `VERCEL_DEPLOY.md`
 
 #### Deploy na Netlify
 

@@ -1,0 +1,18 @@
+# Vercel ignore file
+# Files that Vercel should ignore during build
+
+.env
+.env.local
+.env*.local
+node_modules
+.git
+.DS_Store
+*.log
+.vscode
+.idea
+
+# Test files
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
