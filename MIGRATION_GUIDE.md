@@ -68,11 +68,23 @@ Twój backend (n8n lub inny) musi obsługiwać endpoint:
 }
 ```
 
-### 2. Konfiguracja Cloudflare Turnstile
+### 2. Konfiguracja Cloudflare Turnstile (OPCJONALNIE)
 
-#### Weryfikacja po stronie serwera (WAŻNE!)
+**UWAGA:** Turnstile jest domyślnie WYŁĄCZONY. Możesz pominąć ten krok, jeśli nie chcesz używać captcha.
 
-Backend MUSI weryfikować token Turnstile:
+#### Włączenie Turnstile
+
+Jeśli chcesz włączyć Cloudflare Turnstile:
+
+1. Edytuj `.env.production`:
+   ```env
+   PUBLIC_ENABLE_TURNSTILE=true
+   PUBLIC_TURNSTILE_SITE_KEY=your_production_site_key
+   ```
+
+#### Weryfikacja po stronie serwera (jeśli używasz Turnstile)
+
+Backend POWINIEN weryfikować token Turnstile:
 
 ```javascript
 // Przykład dla Node.js
@@ -96,14 +108,17 @@ async function verifyTurnstile(token) {
 }
 
 // W endpoint handler
-if (!await verifyTurnstile(captchaToken)) {
-  return {
-    success: false,
-    error: {
-      code: 'CAPTCHA_FAILED',
-      message: 'Invalid captcha token'
-    }
-  };
+// Tylko jeśli Turnstile jest włączony
+if (captchaToken && captchaToken !== 'disabled') {
+  if (!await verifyTurnstile(captchaToken)) {
+    return {
+      success: false,
+      error: {
+        code: 'CAPTCHA_FAILED',
+        message: 'Invalid captcha token'
+      }
+    };
+  }
 }
 ```
 

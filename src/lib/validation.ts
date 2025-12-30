@@ -76,7 +76,7 @@ export const postGenerationSchema = z.object({
 
   captchaToken: z
     .string()
-    .min(1, 'Wypełnij captcha'),
+    .optional(), // Made optional - enable when Turnstile keys are available
 });
 
 export type PostGenerationFormData = z.infer<typeof postGenerationSchema>;

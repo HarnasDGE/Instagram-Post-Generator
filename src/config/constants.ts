@@ -62,10 +62,11 @@ export const CTA_TYPES = [
 
 /**
  * Cloudflare Turnstile configuration
- * Replace with your actual site key
+ * Set ENABLE_TURNSTILE=true in .env when you have the keys
  */
 export const TURNSTILE_CONFIG = {
-  siteKey: process.env.PUBLIC_TURNSTILE_SITE_KEY || 'YOUR_TURNSTILE_SITE_KEY',
+  enabled: import.meta.env.PUBLIC_ENABLE_TURNSTILE === 'true' || false,
+  siteKey: import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '',
   theme: 'light' as const,
 } as const;
 

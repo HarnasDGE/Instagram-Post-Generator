@@ -9,7 +9,7 @@ Nowoczesna aplikacja do generowania postów na Instagram z wykorzystaniem AI, zb
 - 📸 **Generowanie promptów do zdjęć**: otrzymuj propozycje dla AI image generators (Midjourney, DALL-E)
 - #️⃣ **Smart hashtagi**: automatyczne generowanie relevantnych hashtagów
 - 🎯 **Różne typy CTA**: link w bio, komentarze, udostępnienia, DM i więcej
-- 🔒 **Bezpieczeństwo**: Cloudflare Turnstile, walidacja formularzy z Zod
+- 🔒 **Bezpieczeństwo**: Cloudflare Turnstile (opcjonalne), walidacja formularzy z Zod
 - 📱 **Responsywny design**: działa na wszystkich urządzeniach
 - ⚡ **Szybki i nowoczesny**: Astro + React + Tailwind CSS
 
@@ -39,6 +39,8 @@ npm run dev
 
 Aplikacja będzie dostępna pod adresem: `http://localhost:4321`
 
+**Gotowe!** Możesz już korzystać z aplikacji. Cloudflare Turnstile jest wyłączony domyślnie, więc nie musisz go konfigurować.
+
 ## 🔧 Konfiguracja
 
 ### Zmienne środowiskowe
@@ -46,8 +48,9 @@ Aplikacja będzie dostępna pod adresem: `http://localhost:4321`
 Edytuj plik `.env`:
 
 ```env
-# Cloudflare Turnstile - pobierz klucze z https://dash.cloudflare.com/
-PUBLIC_TURNSTILE_SITE_KEY=your_turnstile_site_key_here
+# Cloudflare Turnstile (OPCJONALNE - domyślnie wyłączone)
+PUBLIC_ENABLE_TURNSTILE=false
+PUBLIC_TURNSTILE_SITE_KEY=
 
 # Konfiguracja API
 PUBLIC_API_URL=http://localhost:3000/api
@@ -57,13 +60,21 @@ PUBLIC_USE_MOCK=true  # Ustaw na false, gdy backend będzie gotowy
 NODE_ENV=development
 ```
 
-### Cloudflare Turnstile
+### Cloudflare Turnstile (Opcjonalne)
+
+**Turnstile jest WYŁĄCZONY domyślnie**, więc możesz używać aplikacji bez niego.
+
+Aby włączyć Cloudflare Turnstile:
 
 1. Przejdź do [Cloudflare Dashboard](https://dash.cloudflare.com/)
 2. Wybierz "Turnstile" z menu
 3. Utwórz nowy site
 4. Skopiuj "Site Key" i "Secret Key"
-5. Wklej "Site Key" do zmiennej `PUBLIC_TURNSTILE_SITE_KEY` w pliku `.env`
+5. Edytuj plik `.env`:
+   ```env
+   PUBLIC_ENABLE_TURNSTILE=true
+   PUBLIC_TURNSTILE_SITE_KEY=your_site_key_here
+   ```
 
 ## 🏗️ Struktura Projektu
 

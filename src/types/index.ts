@@ -40,7 +40,7 @@ export interface PostGenerationRequest {
   avoidTopics?: string;
   numberOfImages: number;
   ctaType: CTAType;
-  captchaToken: string;
+  captchaToken?: string; // Optional when Turnstile is disabled
 }
 
 export interface PostGenerationResponse {

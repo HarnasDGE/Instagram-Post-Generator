@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { postGenerationSchema, type PostGenerationFormData } from '@/lib/validation';
 import { apiClient } from '@/lib/api/client';
-import { POST_STYLES, LANGUAGES, CTA_TYPES } from '@/config/constants';
+import { POST_STYLES, LANGUAGES, CTA_TYPES, TURNSTILE_CONFIG } from '@/config/constants';
 import { Button } from '@components/ui/Button';
 import { Input } from '@components/ui/Input';
 import { Label } from '@components/ui/Label';
@@ -20,7 +20,7 @@ interface PostGeneratorFormProps {
 
 export const PostGeneratorForm: React.FC<PostGeneratorFormProps> = ({ onSuccess }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState('');
+  const [captchaToken, setCaptchaToken] = useState(TURNSTILE_CONFIG.enabled ? '' : 'disabled');
   const [apiError, setApiError] = useState<string | null>(null);
 
   const {
@@ -54,7 +54,7 @@ export const PostGeneratorForm: React.FC<PostGeneratorFormProps> = ({ onSuccess 
         avoidTopics: data.avoidTopics,
         numberOfImages: data.numberOfImages,
         ctaType: data.ctaType,
-        captchaToken: data.captchaToken,
+        captchaToken: data.captchaToken || 'disabled',
       });
 
       if (response.success) {
@@ -218,11 +218,13 @@ export const PostGeneratorForm: React.FC<PostGeneratorFormProps> = ({ onSuccess 
             </Select>
           </FormField>
 
-          {/* Captcha */}
-          <FormField error={errors.captchaToken?.message}>
-            <Label required>Weryfikacja</Label>
-            <TurnstileWidget onSuccess={handleCaptchaSuccess} />
-          </FormField>
+          {/* Captcha - only show if enabled */}
+          {TURNSTILE_CONFIG.enabled && (
+            <FormField error={errors.captchaToken?.message}>
+              <Label required>Weryfikacja</Label>
+              <TurnstileWidget onSuccess={handleCaptchaSuccess} />
+            </FormField>
+          )}
 
           {/* API Error */}
           {apiError && (
@@ -237,7 +239,7 @@ export const PostGeneratorForm: React.FC<PostGeneratorFormProps> = ({ onSuccess 
             className="w-full"
             size="lg"
             isLoading={isSubmitting}
-            disabled={!captchaToken}
+            disabled={TURNSTILE_CONFIG.enabled && !captchaToken}
           >
             {isSubmitting ? 'Generuję post...' : 'Wygeneruj post'}
           </Button>
