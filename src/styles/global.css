@@ -67,4 +67,9 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  .writing-mode-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
 }
