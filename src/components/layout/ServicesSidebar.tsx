@@ -55,7 +55,7 @@ const services: Service[] = [
   },
 ];
 
-export const ServicesSidebar: React.FC = () => {
+const ServicesSidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -207,3 +207,5 @@ export const ServicesSidebar: React.FC = () => {
     </>
   );
 };
+
+export default ServicesSidebar;
