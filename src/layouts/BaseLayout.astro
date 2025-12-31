@@ -8,6 +8,8 @@ const {
   title = 'Instagram Post Generator',
   description = 'Generuj angażujące posty na Instagram z pomocą AI',
 } = Astro.props;
+
+import ServicesSidebar from '@components/layout/ServicesSidebar';
 ---
 
 <!doctype html>
@@ -40,6 +42,9 @@ const {
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+    <!-- Services Sidebar -->
+    <ServicesSidebar client:load />
+
     <div class="min-h-screen flex flex-col">
       <!-- Header -->
       <header class="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
