@@ -95,7 +95,7 @@ const ServicesSidebar: React.FC = () => {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 animate-fade-in"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] animate-fade-in"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -103,7 +103,7 @@ const ServicesSidebar: React.FC = () => {
       {/* Sliding Panel */}
       <div
         className={cn(
-          'fixed top-0 right-0 h-full w-full sm:w-96 bg-white z-50 shadow-2xl',
+          'fixed top-0 right-0 h-full w-full sm:w-96 bg-white z-[70] shadow-2xl',
           'transform transition-transform duration-300 ease-out',
           'flex flex-col',
           isOpen ? 'translate-x-0' : 'translate-x-full'
